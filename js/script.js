@@ -1,15 +1,14 @@
+const body = document.querySelector('body');
 const crosshair = document.querySelector('.crosshair');
 const frame = document.querySelector('.frame');
 const image = document.getElementById('hero');
-const body = document.querySelector('body');
 
-let ratio = 2;
+let ratio = 1.75;
 
 const increaseRatio = () => {
     ratio += 0.5;
-    console.log(ratio);
-    if (ratio >= 6) {
-        ratio = 2;
+    if (ratio >= 4) {
+        ratio = 1.75;
     }
 };
 
@@ -19,12 +18,10 @@ const displayCrosshair = (e) => {
     crosshair.style.top = e.pageY + 'px';
 };
 
-const zooming = (e) => {
+const adjustingCrosshairBackground = (e) => {
     let bounds = image.getBoundingClientRect();
     let x = e.pageX - 120 / 4 - bounds.left;
     let y = e.pageY - 120 / 4 - bounds.top;
-
-    displayCrosshair(e);
 
     if (crosshair.style.display == 'block') {
         crosshair.style.backgroundImage = `url(${image.src})`;
@@ -34,12 +31,7 @@ const zooming = (e) => {
         crosshair.style.backgroundPosition =
             '-' + x * ratio + 'px -' + y * ratio + 'px';
         crosshair.addEventListener('click', increaseRatio);
-        window.onscroll = function (e) {
-            console.log(e);
-        };
     }
-
-    hideCrosshair(e);
 };
 
 const hideCrosshair = (e) => {
@@ -51,6 +43,12 @@ const hideCrosshair = (e) => {
     ) {
         crosshair.style.display = 'none';
     }
+};
+
+const zooming = (e) => {
+    displayCrosshair(e);
+    adjustingCrosshairBackground(e);
+    hideCrosshair(e);
 };
 
 frame.addEventListener('mouseenter', () => {
