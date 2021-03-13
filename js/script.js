@@ -2,6 +2,7 @@ const body = document.querySelector('body');
 const crosshair = document.querySelector('.crosshair');
 const frame = document.querySelector('.frame');
 const image = document.getElementById('hero');
+const paragraph = document.querySelector('p');
 
 let ratio = 1.75;
 
@@ -24,6 +25,7 @@ const adjustingCrosshairBackground = (e) => {
     let y = e.pageY - 120 / 4 - bounds.top;
 
     if (crosshair.style.display == 'block') {
+        paragraph.style.opacity = '0.9';
         crosshair.style.backgroundImage = `url(${image.src})`;
         crosshair.style.backgroundSize =
             image.width * ratio + 'px ' + image.height * ratio + 'px';
@@ -42,6 +44,7 @@ const hideCrosshair = (e) => {
         e.pageY > window.screen.height / 2 + (image.height + 20) / 2
     ) {
         crosshair.style.display = 'none';
+        paragraph.style.opacity = '0';
     }
 };
 

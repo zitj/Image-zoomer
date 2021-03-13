@@ -5,10 +5,17 @@ body {
   background: #ffffe8;
   font-family: 'Poppins', sans-serif;
   text-align: center;
+  color: #010157;
 }
 
 h1 {
-  color: #010157;
+  font-size: 4em;
+}
+
+p {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  opacity: 0;
 }
 
 .crosshair {
